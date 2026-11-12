@@ -47,7 +47,7 @@ while True:
         ############
         file_data = b"".join(chunks)
         with open("received.txt", "wb") as f: 
-            f.write(file_data)
+            f.write(file_data+b"x")
         ############
         with open ("received.txt", "rb") as f:
             data = f.read()
