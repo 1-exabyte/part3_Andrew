@@ -13,6 +13,10 @@ sock.bind(("0.0.0.0",8000 ))
 with open ("test_socket.py", "rb") as f:
     data = f.read()
     print(len(data))
+    for i in range(0, len(data), 150):
+        chunk = data[i:i+150]
+        print(i, chunk)
+        sock.sendto(struct.pack("!BI", 0, i//150) + chunk, ("127.0.0.1", 9000))
 
 while True:
     data, addr = sock.recvfrom(65535)
