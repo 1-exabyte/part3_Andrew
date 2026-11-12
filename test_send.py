@@ -18,7 +18,7 @@ with open ("test_socket.py", "rb") as f:
         chunk = data[i:i+chunksize]
         print(i, chunk)
         sock.sendto(struct.pack("!BI", 0, i//chunksize) + chunk, ("127.0.0.1", 9000))
-    sock.sendto(struct.pack("!BI", 0, (len(data)//chunksize)+1) + chunk, ("127.0.0.1", 9000))
+    sock.sendto(struct.pack("!BI", 2, (len(data)//chunksize)+1) + chunk, ("127.0.0.1", 9000))
 
 while True:
     data, addr = sock.recvfrom(65535)
