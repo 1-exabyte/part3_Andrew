@@ -1,5 +1,8 @@
 import socket
 import struct
+import hashlib
+
+
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(("0.0.0.0", 9000))
 
@@ -46,6 +49,13 @@ while True:
         with open("received.txt", "wb") as f: 
             f.write(file_data)
         ############
+        with open ("received.txt", "rb") as f:
+            data = f.read()
+        if hashlib.sha256(data).digest() == end_hash:
+            print("HASH MATCH")
+        else:
+            print("HASH MISMATCH")
+
         print("FILE COMPLETE")
         break
 print(buffer, expected)
