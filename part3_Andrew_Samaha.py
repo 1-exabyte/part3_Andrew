@@ -16,8 +16,8 @@ def glue(data):
 
 while True:
     data, addr = sock.recvfrom(65535)
-    seq = struct.unpack("!I", data[:4])[0]
-    payload = data[4:]
+    ptype, seq = struct.unpack("!BI", data[:5])
+    payload = data[5:]
     if seq == expected:
         print("in order")
         glue(payload)
