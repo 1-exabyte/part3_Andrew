@@ -4,3 +4,6 @@ import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(("0.0.0.0",8000 ))
 sock.sendto(b"hello", ("127.0.0.1", 9000))
+while True:
+    data, addr = sock.recvfrom(65535)
+    print("received data from " + str(addr))
