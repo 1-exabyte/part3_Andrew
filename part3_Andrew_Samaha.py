@@ -37,7 +37,7 @@ while True:
         print("discard")
     print(f"----------------------- ACK {expected} -----------------------")
     sock.sendto(struct.pack("!I", expected), addr)
-    if end_seq is not None and expected > end_seq:
+    if end_seq is not None and expected == end_seq:
         sock.sendto(struct.pack("!I", expected + 1), addr)
         print("FILE COMPLETE")
         break
