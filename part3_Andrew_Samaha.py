@@ -8,7 +8,6 @@ seq=4
 def glue(data):
     chunks.append(data)
     print("chunk:" + str(chunks))
-    print(f"ACK {expected}")
 
 
 for seq in [4, 5, 6, 7, 8, 15, 16, 9, 10, 11, 12, 13, 14]:
@@ -26,5 +25,6 @@ for seq in [4, 5, 6, 7, 8, 15, 16, 9, 10, 11, 12, 13, 14]:
         print(buffer)
     else:
         print("discard")
+    print(f"ACK {expected}")
 
 print(buffer, expected)
