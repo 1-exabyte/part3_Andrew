@@ -11,7 +11,7 @@ sock.bind(("0.0.0.0",8000 ))
 #sock.sendto(struct.pack("!BI", 0, 4) + b" andrew", ("127.0.0.1", 9000))
 #sock.sendto(struct.pack("!BI", 2, 5) + b"dataend", ("127.0.0.1", 9000))
 chunksize = 150
-with open ("test_socket.py", "rb") as f:
+with open ("test_send.py", "rb") as f:
     data = f.read()
     print(len(data))
     for i in range(0, len(data), chunksize):
