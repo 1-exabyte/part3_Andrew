@@ -21,6 +21,7 @@ while True:
     if ptype == 2:
         print("end packet")
         end_seq = seq
+        end_hash = payload
     elif seq == expected:
         print("in order")
         glue(payload)
