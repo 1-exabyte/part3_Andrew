@@ -35,7 +35,7 @@ while True:
         print(buffer)
     else:
         print("discard")
-    print(f"ACK {expected}")
+    print(f"----------------------- ACK {expected} -----------------------")
     sock.sendto(struct.pack("!I", expected), addr)
 
 print(buffer, expected)
