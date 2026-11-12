@@ -2,5 +2,5 @@
 import socket
 #name a socket and bind it to a port
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind(("0.0.0.0",9003))
+sock.bind(("0.0.0.0",9000))
 sock.sendto(b"hello", ("127.0.0.1", 9000))
