@@ -8,7 +8,7 @@ expected=0
 buffer={}
 chunks=[]
 seq=4
-
+end_seq = None
 
 def glue(data):
     chunks.append(data)
@@ -18,7 +18,10 @@ while True:
     data, addr = sock.recvfrom(65535)
     ptype, seq = struct.unpack("!BI", data[:5])
     payload = data[5:]
-    if seq == expected:
+    if ptype == 2:
+        print("end packet")
+        end_seq = seq
+    elif seq == expected:
         print("in order")
         glue(payload)
         expected += 1
