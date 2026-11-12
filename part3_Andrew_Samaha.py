@@ -52,9 +52,9 @@ while True:
         with open ("received.txt", "rb") as f:
             data = f.read()
         if hashlib.sha256(data).digest() == end_hash:
-            print("HASH MATCH")
+            print(":) HASH MATCH")
         else:
-            print("HASH MISMATCH")
+            print(":( HASH MISMATCH")
 
         print("FILE COMPLETE")
         break
