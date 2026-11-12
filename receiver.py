@@ -48,6 +48,10 @@ duplicates = 0
 start_time = None
 
 
+def glue(data):
+    chunks.append(data)              # add this piece to the end of the file
+
+
 def send_ack():
     sock.sendto(struct.pack("!BI", ACK, expected), addr)
 
@@ -72,11 +76,11 @@ while True:
 
     # ---- in order: glue it, then glue everything in the buffer that now follows
     elif seq == expected:
-        chunks.append(payload)
+        glue(payload)
         expected += 1
         first = seq
         while expected in buffer:
-            chunks.append(buffer.pop(expected))
+            glue(buffer.pop(expected))
             expected += 1
         if expected - first == 1:
             in_order += 1
