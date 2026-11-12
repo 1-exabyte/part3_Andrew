@@ -4,8 +4,10 @@ import struct
 #name a socket and bind it to a port
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(("0.0.0.0",8000 ))
-for n in [0, 2, 3, 1]:
-    sock.sendto(struct.pack("!BI", 0, n) + b"data", ("127.0.0.1", 9000))
+sock.sendto(struct.pack("!BI", 0, 0) + b"hello", ("127.0.0.1", 9000))
+sock.sendto(struct.pack("!BI", 0, 1) + b"my", ("127.0.0.1", 9000))
+sock.sendto(struct.pack("!BI", 0, 2) + b"name", ("127.0.0.1", 9000))
+sock.sendto(struct.pack("!BI", 0, 3) + b"is", ("127.0.0.1", 9000))
 sock.sendto(struct.pack("!BI", 2, 4) + b"dataend", ("127.0.0.1", 9000))
 while True:
     data, addr = sock.recvfrom(65535)
