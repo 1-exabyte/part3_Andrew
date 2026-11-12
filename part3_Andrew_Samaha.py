@@ -42,6 +42,8 @@ while True:
         print(chunks)
         ############
         file_data = b"".join(chunks)
+        with open("received.txt", "wb") as f: 
+            f.write(file_data)
         ############
         print("FILE COMPLETE")
         break
