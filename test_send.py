@@ -1,6 +1,7 @@
 # test_send.py -- send one test packet to test_socket.py
 import socket
 import struct
+import hashlib
 #name a socket and bind it to a port
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(("0.0.0.0",8000 ))
@@ -18,7 +19,7 @@ with open ("test_send.py", "rb") as f:
         chunk = data[i:i+chunksize]
         print(i, chunk)
         sock.sendto(struct.pack("!BI", 0, i//chunksize) + chunk, ("127.0.0.1", 9000))
-    sock.sendto(struct.pack("!BI", 2, i // chunksize + 1), ("127.0.0.1", 9000))
+    sock.sendto(struct.pack("!BI", 2, i // chunksize + 1)+hashlib.sha256(data).digest(), ("127.0.0.1", 9000))
 
 while True:
     data, addr = sock.recvfrom(65535)
