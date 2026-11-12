@@ -12,7 +12,7 @@ end_seq = None
 
 def glue(data):
     chunks.append(data)
-    print("chunk:" + str(chunks))
+    #print("chunk:" + str(chunks))
 
 while True:
     data, addr = sock.recvfrom(65535)
