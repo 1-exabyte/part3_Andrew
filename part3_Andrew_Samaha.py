@@ -40,6 +40,9 @@ while True:
     if end_seq is not None and expected == end_seq:
         sock.sendto(struct.pack("!I", expected + 1), addr)
         print(chunks)
+        ############
+        file_data = b"".join(chunks)
+        ############
         print("FILE COMPLETE")
         break
 print(buffer, expected)
