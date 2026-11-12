@@ -1,8 +1,9 @@
 import socket
+import struct
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(("0.0.0.0", 9000))
 
-expected=4
+expected=0
 
 buffer={}
 chunks=[]
@@ -13,11 +14,13 @@ def glue(data):
     chunks.append(data)
     print("chunk:" + str(chunks))
 
-
-for seq in [4, 5, 6, 7, 8, 15, 16, 9, 10, 11, 12, 13, 14]:
+while True:
+    data, addr = sock.recvfrom(65535)
+    seq = struct.unpack("!I", data[:4])[0]
+    payload = data[4:]
     if seq == expected:
         print("in order")
-        glue("data" + str(seq))
+        glue(payload)
         expected += 1
         while expected in buffer:
             print("took out", expected)
@@ -25,7 +28,7 @@ for seq in [4, 5, 6, 7, 8, 15, 16, 9, 10, 11, 12, 13, 14]:
             expected += 1
     elif seq > expected:
         print("put in buffer")
-        buffer[seq] = "data" + str(seq)
+        buffer[seq] = payload
         print(buffer)
     else:
         print("discard")
