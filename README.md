@@ -1,4 +1,6 @@
-# Reliable File Transfer over UDP
+# EECE 350 Final Project
+
+## Reliable File Transfer over UDP
 
 A file is sent over UDP (which can lose, repeat and reorder packets) and arrives complete and correct.
 Python 3, standard library only.
