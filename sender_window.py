@@ -46,6 +46,14 @@ def retransmit(seq_num, packets, send_packet, state, send_time, stats):
     stats["retransmissions"] += 1
 
 
+def has_timed_out(base, next_seq, timer_started, now, timeout):
+    if base == next_seq or timer_started is None:
+        # are any packets waiting for acks or is a timer running->so false
+        return False
+
+    return now - timer_started >= timeout  # simple :)
+
+
 if __name__ == "__main__":
     def practice_send(packet):
         pass
@@ -100,3 +108,8 @@ if __name__ == "__main__":
     print("base:", base)
     print("next_seq:", next_seq)
     print("dup_count:", dup_count)
+    print("Testing timeout detection:")
+
+    print(has_timed_out(1, 5, 10.0, 10.5, 1.0))
+    print(has_timed_out(1, 5, 10.0, 11.2, 1.0))
+    print(has_timed_out(5, 5, None, 11.2, 1.0))
