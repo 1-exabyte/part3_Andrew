@@ -1,3 +1,6 @@
+# receiver_practice.py -- Member 3 (Andrew Samaha): first practice version of the receiver
+# (the finished version is receiver.py)
+
 import socket
 import struct
 import hashlib
@@ -46,7 +49,7 @@ while True:
         print(chunks)
         ############
         file_data = b"".join(chunks)
-        with open("received.txt", "wb") as f: 
+        with open("received.txt", "wb") as f:
             f.write(file_data+b"x")
         ############
         with open ("received.txt", "rb") as f:

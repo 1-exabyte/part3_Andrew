@@ -1,3 +1,5 @@
+# test_socket.py -- Member 3 practice: receive one packet on port 9000 and reply "ACK"
+
 import socket
 import struct
 #name a socket and bind it to a port

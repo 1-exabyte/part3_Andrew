@@ -1,0 +1,10 @@
+# files the programs create when they run
+received.txt
+*.bin
+
+# Python cache
+__pycache__/
+*.pyc
+
+# editor folders
+.vscode/
