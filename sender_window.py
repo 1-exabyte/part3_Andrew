@@ -66,7 +66,7 @@ if __name__ == "__main__":
 
     state = ["-"] * len(packets)
     send_time = {}
-    stats = {"transmissions": 0, "retransmissions": 0}
+    stats = {"transmissions": 0, "retransmissions": 0, "timeouts": 0}
 
     # Send packets 0, 1, 2, 3.
     next_seq = fill_window(
@@ -113,3 +113,36 @@ if __name__ == "__main__":
     print(has_timed_out(1, 5, 10.0, 10.5, 1.0))
     print(has_timed_out(1, 5, 10.0, 11.2, 1.0))
     print(has_timed_out(5, 5, None, 11.2, 1.0))
+    print("Testing actual timeout:")
+
+    timeout = 1.0
+
+    # Start the timer as we begin sending outstanding packets.
+    timer_started = time.monotonic()
+
+    # Send the remaining packets: 5, 6, 7.
+    next_seq = fill_window(
+        packets, base, next_seq, window_size,
+        practice_send, state, send_time, stats
+    )
+
+    # For this exercise, let time pass without processing any ACKs.
+    time.sleep(1.1)
+
+    now = time.monotonic()
+
+    if has_timed_out(base, next_seq, timer_started, now, timeout):
+        print("TIMEOUT", base)
+        stats["timeouts"] += 1
+
+        retransmit(
+            base, packets, practice_send, state, send_time, stats
+        )
+
+        timer_started = time.monotonic()
+        dup_count = 0
+
+    print("base:", base)
+    print("next_seq:", next_seq)
+    print("state:", state)
+    print("stats:", stats)
